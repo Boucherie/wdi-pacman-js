@@ -4,7 +4,7 @@ var lives = 2;
 
 
 // Define your ghosts here
-ghosts = [
+
   var inky = {
     menu_option: '1',
     name: 'Inky',
@@ -35,7 +35,8 @@ ghosts = [
     character: 'Pokey',
     edible: false
   };
-];
+
+ghosts = [inky, blinky, pinky, clyde];
 
 // Draw the screen functionality
 function drawScreen() {
