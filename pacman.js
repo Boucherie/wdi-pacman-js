@@ -4,39 +4,38 @@ var lives = 2;
 
 
 // Define your ghosts here
+ghosts = [
+  var inky = {
+    menu_option: '1',
+    name: 'Inky',
+    colour: 'Red',
+    character: 'Shadow',
+    edible: false
+  };
 
-var inky = {
-  menu_option: '1',
-  name: 'Inky',
-  colour: 'Red',
-  character: 'Shadow',
-  edible: false
-};
+  var blinky = {
+    menu_option: '2',
+    name: 'Blinky',
+    colour: 'Cyan',
+    character: 'Speedy',
+    edible: false
+  };
 
-var blinky = {
-  menu_option: '2',
-  name: 'Blinky',
-  colour: 'Cyan',
-  character: 'Speedy',
-  edible: false
-};
+  var pinky = {
+    menu_option: '3',
+    name: 'Pinky',
+    colour: 'Pink',
+    character: 'Bashful',
+    edible: false
+  };
 
-var pinky = {
-  menu_option: '3',
-  name: 'Pinky',
-  colour: 'Pink',
-  character: 'Bashful',
-  edible: false
-};
-
-var clyde = {
-  menu_option: '4',
-  name: 'Clyde',
-  character: 'Pokey',
-  edible: false
-};
-// replace this comment with your four ghosts setup as objects
-
+  var clyde = {
+    menu_option: '4',
+    name: 'Clyde',
+    character: 'Pokey',
+    edible: false
+  };
+];
 
 // Draw the screen functionality
 function drawScreen() {
@@ -74,6 +73,25 @@ function eatDot() {
   score += 10;
 }
 
+function gameOver() {
+  if lives < 0 {
+    process.exit
+  };
+}
+
+function eatGhost(ghost) {
+  while lives > 0 {
+    if ghost.edible === false {
+        console.log('\nPac-Man is killed by ' + ghost.name ', the ' + ghost.colour ' ghost.')
+        lives -= 1;
+    };
+  }
+  if lives <= 0 {
+    gameOver()
+  };
+}
+
+
 
 // Process Player's Input
 function processInput(key) {
@@ -85,6 +103,7 @@ function processInput(key) {
     case 'd':
       eatDot();
       break;
+
     default:
       console.log('\nInvalid Command!');
   }
@@ -108,7 +127,7 @@ drawScreen();
 stdin.on('data', function(key) {
   process.stdout.write(key);
   processInput(key);
-  setTimeout(drawScreen, 300); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
+  setTimeout(drawScreen, 500); // The command prompt will flash a message for 500 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
 });
 
 // Player Quits
