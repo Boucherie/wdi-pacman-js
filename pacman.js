@@ -32,6 +32,7 @@ var lives = 2;
   var clyde = {
     menu_option: '4',
     name: 'Clyde',
+    colour: 'Orange',
     character: 'Pokey',
     edible: false
   };
@@ -59,6 +60,10 @@ function displayStats() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  console.log('(1) Eat Inky');
+  console.log('(2) Eat Blinky');
+  console.log('(3) Eat Pinky');
+  console.log('(4) Eat Clyde');
   console.log('(q) Quit');
 }
 
@@ -74,21 +79,18 @@ function eatDot() {
   score += 10;
 }
 
-function gameOver() {
-  if lives < 0 {
-    process.exit
+function gameOver(lives) {
+  if (lives < 0) {
+    process.exit()
+    console.log('\nGame Over!');
   };
 }
 
 function eatGhost(ghost) {
-  while lives > 0 {
-    if ghost.edible === false {
-        console.log('\nPac-Man is killed by ' + ghost.name ', the ' + ghost.colour ' ghost.')
-        lives -= 1;
-    };
-  }
-  if lives <= 0 {
-    gameOver()
+  if (ghost.edible === false) {
+    lives -= 1;
+    console.log('\nLost one life to ' + ghost.name + ' the ' + ghost.colour + ' ghost.')
+    gameOver(lives);
   };
 }
 
@@ -100,6 +102,19 @@ function processInput(key) {
     case '\u0003': // This makes it so CTRL-C will quit the program
     case 'q':
       process.exit();
+      break;
+      //case '1':
+    case '1':
+      eatGhost(inky);
+      break;
+    case '2':
+      eatGhost(blinky);
+      break;
+    case '3':
+      eatGhost(pinky);
+      break;
+    case '4':
+      eatGhost(clyde);
       break;
     case 'd':
       eatDot();
