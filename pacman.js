@@ -2,6 +2,7 @@
 var score = 0;
 var lives = 2;
 
+var powerPellets = 4;
 
 // Define your ghosts here
 
@@ -54,12 +55,13 @@ function clearScreen() {
 }
 
 function displayStats() {
-  console.log('Score: ' + score + '     Lives: ' + lives);
+  console.log('Score: ' + score + '     Lives: ' + lives + '\nPower-Pellets: ' + powerPellets );
 }
 
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  console.log('(p) Eat Power-Pellet');
   console.log('(1) Eat Inky');
   console.log('(2) Eat Blinky');
   console.log('(3) Eat Pinky');
@@ -77,6 +79,12 @@ function displayPrompt() {
 function eatDot() {
   console.log('\nChomp!');
   score += 10;
+}
+
+function eatPowerPellet() {
+  console.log('\nPower up!');
+  score += 50;
+  powerPellets -= 1;
 }
 
 function gameOver(lives) {
@@ -102,6 +110,9 @@ function processInput(key) {
     case '\u0003': // This makes it so CTRL-C will quit the program
     case 'q':
       process.exit();
+      break;
+    case 'p':
+      eatPowerPellet();
       break;
       //case '1':
     case '1':
