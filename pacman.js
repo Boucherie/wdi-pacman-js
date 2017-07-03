@@ -81,10 +81,17 @@ function eatDot() {
   score += 10;
 }
 
-function eatPowerPellet() {
-  console.log('\nPower up!');
-  score += 50;
-  powerPellets -= 1;
+function eatPowerPellet(ghosts) {
+  if (powerPellets > 0) {
+    score += 50;
+    // console.log('\nPower up!');
+    // for (var i = 0; i < ghosts.length; i++) {
+    //   ghosts[i].edible = true;
+    // }
+    powerPellets -= 1;
+  } else {
+    console.log('\nNo Power-Pellets left!');
+  }
 }
 
 function gameOver(lives) {
